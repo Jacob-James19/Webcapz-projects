@@ -1,0 +1,8 @@
+    {% extends "home/index.html"%}
+    {% block main %}
+    <h2>Welcome to the product details</h2>
+    <img src="{{ product.image.url }}" alt="Product" height="50px" width="50px">
+    <p>{{ product.price }}</p>
+    <p>{{ product.description }}</p>
+    <button>Add to cart</button>
+    {% endblock %}

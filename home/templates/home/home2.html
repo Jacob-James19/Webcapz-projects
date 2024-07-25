@@ -1,0 +1,56 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>{% block title %}Webcapz e-commerce {% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1 class="title">Webcapz Nigeria Limited</h1>
+        <nav>
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About</a></li>
+                <li>Contact</li>
+                <li>Services</li>
+                <li><a href="{% url 'add_product' %}">Add Product</a></li>
+                {% if user.is_authenticated %}
+                    <li>
+                        <form action="{% url 'logout' %}" method="POST">
+                            {% csrf_token %}
+                            <input type="submit" value="Logout">
+                        </form>
+                    </li>
+                    <li>{{ user.username }}</li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Login</a></li>
+                    <li><a href="{% url 'register' %}">Register</a></li>
+                {% endif %}
+
+            </ul>
+        </nav>
+    </header>
+    <main>
+          {% block main %} 
+            {% for product in products %}
+                <div class="data">
+                    <ul>
+                        <li>
+                            <a href="{% url 'product_details' product.id %}">
+                                <img src="{{ product.image.url }}" height="100px" width="120px">
+                            </a>
+                        </li>
+                        <li>{{product.name}}</li>
+                        <li>N{{ product.price }}</li>
+                        <button>Add to Cart</button>
+                    </ul>
+                </div>
+                {% endfor %}
+            {% endblock %}
+    </main>
+    <!-- <script type="text/javascript" src="{% static 'js/script.js' %}"></script> -->
+</body>
+</html>

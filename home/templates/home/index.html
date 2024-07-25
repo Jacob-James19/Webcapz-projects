@@ -1,0 +1,47 @@
+{% load static %}
+{{ data }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>WEBCAPZ</title>
+</head>
+<body>
+    <header class="header">
+        <nav class="nav">
+            <div class="logo">WEBCAPZ</div>
+            <ul class="navcon">
+                <li><a href=""></a>Platform</li>
+                <li><a href=""></a>Resources</li>
+                <li><a href=""></a>Company</li>
+                <li><a href=""></a>Pricing</li>
+            </ul>
+            <ul class="navcon2">
+                <li><a href=""></a>Login</li>
+                <li><a href=""></a>Signup</li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        {% block main %}
+            {% for d in object %}
+            <section class="sectionwrapper">
+                <article class="sectionparent">
+                    <div class="data">
+                        <ul class="list">
+                            <li><a href="{% url 'product_detail' d.id %}"><img src="{{ d.image.url }}" height="50px" width="50px"></a></li>
+                            <li>{{d.name}}</li>
+                            <li>{{d.price}}</li>
+                        </ul>
+                        <button class="button">Add to Cart</button>
+                    </div>
+                </article>
+            </section>    
+            {% endfor %}
+        {% endblock%}
+    </main>
+    <!-- <script type="text/javascript" src="{% static 'js/script.js' %}"></script> -->
+</body>
+</html>

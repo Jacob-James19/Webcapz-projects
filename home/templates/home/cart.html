@@ -1,0 +1,22 @@
+{% extends 'home/home.html' %}
+
+
+{% block main %}
+    {% for item in cart_items %}
+    <div>
+        <img src="{{ item.product.image.url }}">
+        <p>{{ item.product.name }}</p>
+        <p>Quantity: {{ item.quantity }}</p> 
+        <p>
+            Price: <span style="text-decoration-line:line-through;text-decoration-style:double;">N</span>{{ item.product.price }}
+        </p>
+        <p>
+            <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'remove_item' item.id %}">Remove Item</a></div>
+        </p>
+</div>
+    {% endfor %}
+<p>Total Price: <span style="text-decoration-line:line-through;text-decoration-style:double;">N</span>{{ total_price}}</p>
+<p>
+    <div class="text-center"><a class="btn btn-outline-dark mt-auto" href="{% url 'checkout' %}">Checkout</a></div>
+</p>
+{% endblock %}

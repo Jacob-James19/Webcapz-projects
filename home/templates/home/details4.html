@@ -1,0 +1,8 @@
+{% extends 'home/home.html' %}
+{% block title %} {{ product.name }} | {{ product.description }}{% endblock %}
+{% block main %}
+        <img src="{{ product.image.url }}">
+        <p>{{ product.price }}</p>
+        <p>{{ product.description }}</p>
+        <p><a href="{% url 'add_to_cart' product.id %}">Add to Cart</p>
+{% endblock %}
